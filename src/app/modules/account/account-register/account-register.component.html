@@ -1,0 +1,177 @@
+<div id="account" class="page-layout carded fullwidth inner-scroll">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div
+      class="header accent"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button
+          mat-icon-button
+          class="mr-0 mr-sm-16"
+          [routerLink]="'/app/account/accounts'"
+        >
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          [@animate]="{ value: '*', params: { delay: '100ms', x: '-25px' } }"
+        >
+          <div class="h2" *ngIf="pageType === 'edit'">
+            {{ account?.firstName }}
+          </div>
+          <div class="h2" *ngIf="pageType === 'new'">
+            Nova Conta
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Detalhe da Conta</span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        class="save-account-button"
+        [disabled]="accountForm.invalid || loading"
+        *ngIf="pageType === 'new'"
+        (click)="addAccount()"
+      >
+        <span>ADICIONAR CONTA</span>
+      </button>
+
+      <button
+        mat-raised-button
+        class="save-account-button"
+        [disabled]="accountForm.invalid || accountForm.pristine"
+        *ngIf="pageType === 'edit'"
+        (click)="saveAccount()"
+      >
+        <span>SALVAR CONTA</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <!-- CONTENT -->
+      <div class="content">
+        <form
+          name="accountForm"
+          [formGroup]="accountForm"
+          class="account w-100-p"
+          fxLayout="column"
+          fxFlex
+        >
+          <mat-tab-group>
+            <mat-tab label="Informações básicas">
+              <div class="tab-content p-24" fusePerfectScrollbar>
+                <mat-form-field
+                  appearance="outline"
+                  floatLabel="always"
+                  class="w-100-p"
+                >
+                  <mat-label>Login</mat-label>
+                  <input matInput formControlName="login" />
+                  <mat-icon matSuffix class="secondary-text"
+                    >account_circle</mat-icon
+                  >
+                  <mat-error>
+                    Login is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  floatLabel="always"
+                  class="w-100-p"
+                >
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="firstName" />
+                  <mat-icon matSuffix class="secondary-text"
+                    >account_circle</mat-icon
+                  >
+                  <mat-error>
+                    Name is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  floatLabel="always"
+                  class="w-100-p"
+                >
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" />
+                  <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                  <mat-error
+                    *ngIf="accountForm.get('email').hasError('required')"
+                  >
+                    Email is required
+                  </mat-error>
+                  <mat-error *ngIf="accountForm.get('email').hasError('email')">
+                    Please enter a valid email address
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  floatLabel="always"
+                  class="w-100-p"
+                >
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" formControlName="password" />
+                  <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                  <mat-error>
+                    Password is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  floatLabel="always"
+                  class="w-100-p"
+                >
+                  <mat-label>Password (Confirm)</mat-label>
+                  <input
+                    matInput
+                    type="password"
+                    formControlName="passwordConfirm"
+                  />
+                  <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                  <mat-error
+                    *ngIf="
+                      accountForm.get('passwordConfirm').hasError('required')
+                    "
+                  >
+                    Password confirmation is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      !accountForm
+                        .get('passwordConfirm')
+                        .hasError('required') &&
+                      accountForm
+                        .get('passwordConfirm')
+                        .hasError('passwordsNotMatching')
+                    "
+                  >
+                    Passwords must match
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

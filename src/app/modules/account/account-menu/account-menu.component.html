@@ -1,0 +1,41 @@
+<button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    *ngIf="user$ | async as user"
+  >
+    <img
+      class="avatar mr-0 mr-sm-16"
+      alt=""
+      src="assets/images/avatars/Velazquez.jpg"
+    />
+    <!-- <app-letter-avatar
+      class="mr-3"
+      size="normal"
+      [text]="user.firstName"
+      [color]="user.color"
+    >
+    </app-letter-avatar> -->
+    <span class="username ml-3 mr-12" fxHide fxShow.gt-sm>{{
+      user.firstName
+    }}</span>
+    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+  </div>
+</button>
+
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+  <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>My Profile</span>
+  </button>
+
+  <button mat-menu-item class="" (click)="changePasswordHandler()">
+    <mat-icon>edit</mat-icon>
+    <span>Trocar Senha</span>
+  </button>
+
+  <button (click)="logoutHandler()" mat-menu-item class="">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

@@ -1,0 +1,73 @@
+<div id="accounts" class="page-layout carded fullwidth inner-scroll">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <div class="center">
+    <!-- HEADER -->
+    <div
+      class="header accent"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center"
+    >
+      <!-- APP TITLE -->
+      <div
+        class="logo mb-24 mb-md-0"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <mat-icon
+          class="logo-icon s-32 mr-16"
+          [@animate]="{ value: '*', params: { delay: '50ms', scale: '0.2' } }"
+        >
+          supervisor_account
+        </mat-icon>
+        <span
+          class="logo-text h1"
+          [@animate]="{ value: '*', params: { delay: '100ms', x: '-25px' } }"
+        >
+          Contas
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- ADD BUTTON -->
+      <button
+        *appHasRole="'ROLE_ADMIN'"
+        mat-raised-button
+        [@animate]="{ value: '*', params: { delay: '300ms', scale: '.2' } }"
+        [routerLink]="'/app/account/new-account'"
+        class="add-product-button fuse-white mt-24 mt-md-0"
+      >
+        <span>ADICIONAR NOVA CONTA</span>
+      </button>
+      <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <ng-container *ngIf="loading$ | async as loading; else loading">
+        <app-spinner [size]="20" [shouldShow]="loading"></app-spinner>
+      </ng-container>
+      <ng-template #loading>
+        <div
+          *ngIf="accounts$ | async as data"
+          [@animate]="{ value: '*', params: { delay: '120ms', scale: '.2' } }"
+          class="ps"
+          style="position: relative;"
+          [perfectScrollbar]
+        >
+          <app-account-list-table
+            [data]="data"
+            [roles]="roles"
+            [displayedColumns]="tableDisplayedColumns"
+          ></app-account-list-table>
+        </div>
+      </ng-template>
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+</div>

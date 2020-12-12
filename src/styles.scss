@@ -1,0 +1,9 @@
+// Import Fuse core library
+@import '@fuse/scss/core';
+
+// Import app.theme.scss
+@import 'app/app.theme';
+
+@import '../src/@fuse/scss/bootstrap-utils.scss';
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';

@@ -1,0 +1,18 @@
+.left-menu {
+  padding: 24px 0 64px 0;
+}
+
+.avatar-container {
+  position: absolute !important;
+  border-radius: 50% !important;
+  padding: 8px !important;
+  transform: translateX(-50%) !important;
+  left: 50% !important;
+
+  .avatar {
+    width: 72px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    margin: 0 !important;
+  }
+}

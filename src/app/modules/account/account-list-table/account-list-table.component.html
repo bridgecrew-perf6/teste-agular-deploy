@@ -1,0 +1,122 @@
+<mat-table
+  [dataSource]="dataSource"
+  class="accounts-table"
+  matSort
+  #table
+  [@animateStagger]="{ value: '50' }"
+>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      ID
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <p class="text-truncate">{{ element.id }}</p>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <p class="text-truncate">Nome</p>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <app-letter-avatar
+          class="mr-2"
+          size="normal"
+          [text]="element.firstName"
+          [color]="element?.color"
+        >
+        </app-letter-avatar>
+        <p class="text-truncate">{{ element.firstName }}</p>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="lastName">
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      fxHide
+      mat-sort-header
+      fxShow.gt-md
+    >
+      Sobrenome
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxHide fxShow.gt-md>
+      <p class="text-truncate">{{ element.lastName }}</p>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Email
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <p class="text-truncate">{{ element.email }}</p>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="activated">
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>
+      Ativado
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxHide fxShow.gt-xs>
+      <mat-icon *ngIf="element.activated" class="active-icon green-600 s-16"
+        >check</mat-icon
+      >
+      <mat-icon *ngIf="!element.activated" class="active-icon red-500 s-16"
+        >close</mat-icon
+      >
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div fxFlex="row" fxLayoutAlign="end center">
+        <button
+          *appHasRole="'ROLE_ADMIN'"
+          mat-icon-button
+          [matMenuTriggerFor]="moreMenu"
+          #trigger="matMenuTrigger"
+          aria-label="More"
+          (click)="$event.stopPropagation()"
+        >
+          <mat-icon class="secondary-text">more_vert</mat-icon>
+        </button>
+        <mat-menu #moreMenu="matMenu">
+          <button
+            mat-menu-item
+            aria-label="remove"
+            (click)="deleteItemHandler(element, $event)"
+          >
+            <mat-icon>delete</mat-icon>
+            <span>Remove</span>
+          </button>
+          <button
+            mat-menu-item
+            aria-label="activate"
+            (click)="activatedHandler(element)"
+          >
+            <ng-container *ngIf="!element.activated">
+              <mat-icon>toggle_on</mat-icon>
+              <span>Ativar</span>
+            </ng-container>
+            <ng-container *ngIf="element.activated">
+              <mat-icon>toggle_off</mat-icon>
+              <span>Desativar</span>
+            </ng-container>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row
+    *matHeaderRowDef="displayedColumns; sticky: true"
+  ></mat-header-row>
+  <mat-row
+    class="clicable-item"
+    matRipple
+    [@animate]="{ value: '*', params: { y: '100%' } }"
+    (click)="gotoDetail(row, $event)"
+    *matRowDef="let row; columns: displayedColumns"
+  >
+  </mat-row>
+</mat-table>
+<app-paginator #paginator [paginatorLength]="5"> </app-paginator>

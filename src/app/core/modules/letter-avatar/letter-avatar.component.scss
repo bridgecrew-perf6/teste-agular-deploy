@@ -1,0 +1,42 @@
+:host {
+  .letter-Avatar {
+    text-transform: uppercase;
+    font-weight: 400;
+    &.normal {
+      height: 36px;
+      width: 36px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .letter {
+        line-height: 1;
+        font-size: 100%;
+        color: white;
+      }
+    }
+
+    &.large {
+      width: 60px;
+      height: 60px;
+      font-size: 32px;
+      .letter {
+        font-size: 80%;
+        line-height: 1;
+        color: white;
+      }
+    }
+
+    .avatar-2 {
+      height: 92%;
+      width: 92%;
+      border-radius: 50%;
+      overflow: visible;
+      // background: blueviolet;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

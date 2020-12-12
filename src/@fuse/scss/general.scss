@@ -1,0 +1,6 @@
+.clicable-item {
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}

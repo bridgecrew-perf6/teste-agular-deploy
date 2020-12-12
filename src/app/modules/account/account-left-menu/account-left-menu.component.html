@@ -1,0 +1,15 @@
+<div
+  class="user left-menu"
+  fxLayout="column"
+  [ngClass]="fuseConfig.layout.navbar.secondaryBackground"
+  *ngIf="user$ | async as user"
+>
+  <div class="h3 username">{{ user.firstName }}</div>
+  <div class="h5 email hint-text mt-8">{{ user.email }}</div>
+  <div
+    class="avatar-container"
+    [ngClass]="fuseConfig.layout.navbar.primaryBackground"
+  >
+    <img class="avatar" src="assets/images/avatars/Velazquez.jpg" />
+  </div>
+</div>

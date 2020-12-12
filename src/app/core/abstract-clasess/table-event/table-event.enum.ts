@@ -1,0 +1,8 @@
+export enum TableEvent {
+  DETAIL = 'DETAIL',
+  PAGINATOR_SORT = 'PAGINATOR_SORT',
+  SORT = 'SORT',
+  CHECKBOX = 'CHECKBOX',
+  MENU = 'MENU',
+  DELETE = 'DELETE',
+}
